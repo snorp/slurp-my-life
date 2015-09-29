@@ -1,13 +1,26 @@
 import fs from 'fs';
 import ProgressBar from 'progress';
-
+import yargs from 'yargs';
 import https from 'https';
+import mkdirp from 'mkdirp';
 
 const WORKERS_MAX = 10;
 
-let ACCESS_TOKEN = process.argv[2]; // = '1421c30a-ee4e-32e3-91e4-fb0ae596f2e3';
+let argv = yargs
+  .usage('Usage: $0 --access-token <token> --outdir <directory>')
+  .demand(['access-token'])
+  .default('outdir', 'moments')
+  .argv;
+
+const ACCESS_TOKEN = argv['access-token'];
+const OUTDIR = argv['outdir'];
+
+if (!fs.existsSync(OUTDIR)) {
+  mkdirp.sync(OUTDIR);
+}
 
 console.log(`Using access token = ${ACCESS_TOKEN}`);
+console.log(`Downloading moments to '${OUTDIR}'`);
 
 getMoments().then(function(moments) {
   console.log(`Fetching ${moments.length} moments...`);
@@ -54,7 +67,7 @@ function getMoments() {
 }
 
 function downloadMoment(moment) {
-  let path = `moments/${moment}`;
+  let path = `${OUTDIR}/${moment}`;
   if (fs.existsSync(path)) {
     return Promise.resolve(false);
   }

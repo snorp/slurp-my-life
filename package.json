@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "babel": "^5.8.23",
-    "progress": "^1.1.8"
+    "mkdirp": "^0.5.1",
+    "progress": "^1.1.8",
+    "yargs": "^3.26.0"
   },
   "devDependencies": {},
   "scripts": {
