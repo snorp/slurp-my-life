@@ -1,0 +1,23 @@
+{
+  "name": "slurp-my-life",
+  "version": "1.0.0",
+  "description": "Download all of your ThisLife moments",
+  "main": "slurp.js",
+  "bin": {
+    "slurp-my-life": "./slurp.js"
+  },
+  "dependencies": {
+    "babel": "^5.8.23",
+    "progress": "^1.1.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ThisLife",
+    "backup"
+  ],
+  "author": "James Willcox <snorp@snorp.net>",
+  "license": "ISC"
+}
