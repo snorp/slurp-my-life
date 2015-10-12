@@ -4,18 +4,18 @@ slurp-my-life
 
 This script was made after poking around in the Firefox devtools for a while. It seems to work for me, maybe it will work for you too.
 
-#### Access Token
+#### UID and Access Token
 
-In order to use this tool, you need to log into your ThisLife account and try to find your access token. This is an authentication UID needed to access your account. The best way I've found to do this is by using the 'Network' pane in the Firefox devtools and observing only the 'XHR' tab. When you view your library, there should be at least one POST request to the 'json' path on the 'cmd.thislife.com' domain. Clicking the 'Params' tab on that request will show the POST data. You should see something like:
+In order to use this tool, you need to log into your ThisLife account and try to find your UID and access token. The best way I've found to do this is by using the 'Network' pane in the Firefox devtools and observing only the 'XHR' tab. When you view your library, there should be at least one POST request to the 'json' path on the 'cmd.thislife.com' domain. Clicking the 'Params' tab on that request will show the POST data. You should see something like:
 
 `
-{"method":"dataWarehouse.log","params":["1421c31a-ee4e-32e1-91e4-fb0ae596f2e3",{"experience":"d.web","action":"appforeground"}],"headers":{"X-SFLY-SubSource":"home"},"id":null}
+{"method":"searchMoments","params":["5da70d6d-5eaf-3dd7-af37-3a1f5611035b","50000017695",false,false,false,false,false,false,true,false,false,false,false,false,false],"headers":{"X-SFLY-SubSource":"library"},"id":null}:""
 `
 
-The first string in the "params" array (1421c...) is your access token.
+The first string in the "params" array (1421c...) is your access token, and the second one is your UID.
 
 ```
-$ slurp-my-life --access-token 1421c31a-ee4e-32e1-91e4-fb0ae596f2e3 --outdir ./backups
+$ slurp-my-life --uid 50000017695 --access-token 1421c31a-ee4e-32e1-91e4-fb0ae596f2e3 --outdir ./backups
 Using access token = 1421c31a-ee4e-32e1-91e4-fb0ae596f2e3
 Downloading moments to './backups'
 Fetching 25264 moments...

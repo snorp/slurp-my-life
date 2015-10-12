@@ -7,11 +7,12 @@ import mkdirp from 'mkdirp';
 const WORKERS_MAX = 10;
 
 let argv = yargs
-  .usage('Usage: $0 --access-token <token> --outdir <directory>')
-  .demand(['access-token'])
+  .usage('Usage: $0 --uid <uid> --access-token <token> --outdir <directory>')
+  .demand(['uid', 'access-token'])
   .default('outdir', 'moments')
   .argv;
 
+const UID = argv['uid'];
 const ACCESS_TOKEN = argv['access-token'];
 const OUTDIR = argv['outdir'];
 
@@ -19,6 +20,7 @@ if (!fs.existsSync(OUTDIR)) {
   mkdirp.sync(OUTDIR);
 }
 
+console.log(`Using uid = ${UID}`);
 console.log(`Using access token = ${ACCESS_TOKEN}`);
 console.log(`Downloading moments to '${OUTDIR}'`);
 
@@ -62,7 +64,7 @@ function getMoments() {
       })
     });
 
-    req.end(`{"method":"searchMoments","params":["${ACCESS_TOKEN}","50000087695",true,false,false,false,false,false,true,false,false,false,false,false,false],"headers":{"X-SFLY-SubSource":"library"},"id":null}`);
+    req.end(`{"method":"searchMoments","params":["${ACCESS_TOKEN}","${UID}",true,false,false,false,false,false,true,false,false,false,false,false,false],"headers":{"X-SFLY-SubSource":"library"},"id":null}`);
   });
 }
 
